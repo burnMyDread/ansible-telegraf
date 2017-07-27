@@ -3,6 +3,7 @@
   yum: 
     name: "{{ item }}" 
     state: present
+  become: true
   with_items:
     - curl
 
@@ -12,17 +13,20 @@
     dest: /etc/yum.repos.d/influxdata.repo
     force: yes
     backup: yes
+  become: true
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Install Telegraf packages [RHEL/CentOS]
   yum: 
     name: telegraf
     state: latest
+  become: true
   when: telegraf_install_url is not defined or telegraf_install_url == None
 
 - name: Install Telegraf from URL [RHEL/CentOS]
   yum: 
     name: "{{ telegraf_install_url }}"
     state: present
+  become: true
   when: telegraf_install_url is defined and telegraf_install_url != None
   

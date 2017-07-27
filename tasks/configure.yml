@@ -8,17 +8,21 @@
     owner: telegraf
     group: telegraf
     mode: 0744
+  become: true  
   when: telegraf_template_configuration
 
 - name: Modify user Telegraf should run as
+  become: true
   command: sed -i s/USER=.*/USER={{ telegraf_runas_user }}/ /etc/init.d/telegraf
   when: telegraf_runas_user != "telegraf"
 
 - name: Modify user Telegraf should run as
+  become: true
   command: sed -i s/GROUP=.*/GROUP={{ telegraf_runas_group }}/ /etc/init.d/telegraf
   when: telegraf_runas_group != "telegraf"
   
 - name: Start the Telegraf service
+  become: true
   service:
     name: telegraf
     state: restarted

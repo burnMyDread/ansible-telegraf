@@ -9,7 +9,7 @@ telegraf_agent_interval: 10s
 telegraf_round_interval: "true"
 
 telegraf_flush_interval: 10s
-telegraf_flush_jitter: 0s
+telegraf_flush_jitter: 1s
 telegraf_debug: "false"
 telegraf_hostname: 
 
@@ -39,9 +39,6 @@ telegraf_plugin_settings:
     totalcpu: "true"
     drop:
       - cpu_time
-  disk:
-    mountpoints:
-      - "/"
   io:
     skip_serial_number: "true"
   procstat:
